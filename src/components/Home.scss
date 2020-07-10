@@ -35,5 +35,15 @@
 }
 
 .chart-option {
+    display: flex;
+    margin: 0 50px;
+}
+
+.no-data {
+    margin: 50px;
     text-align: center;
+}
+
+.date-group {
+    margin-left: auto;
 }

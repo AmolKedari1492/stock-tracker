@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 import Highchart from "./Highchart";
 import ChartOption from "./ChartOption";
+import DateOption from "./DateOption";
 
 import APIService from "../services/API";
 
 import {
-    DATA_DISPLAY_TYPES
+    DATA_DISPLAY_TYPES,
+    DATA_DURATION
 } from "../constants/";
 
 import {
@@ -20,7 +23,8 @@ class HistoricChart extends Component {
 
         this.state = {
             data: [],
-            active: DATA_DISPLAY_TYPES.OPEN
+            active: DATA_DISPLAY_TYPES.OPEN,
+            duration: DATA_DURATION.ONE_YEAR
         };
     }
 
@@ -30,7 +34,7 @@ class HistoricChart extends Component {
 
     fetchHistoricalData = () => {
         APIService.getHistoricalData((resp) => {
-            this.processData(resp.splice(0, 100))
+            this.processData(resp)
         }, err => console.error(err))
     }
 
@@ -50,17 +54,32 @@ class HistoricChart extends Component {
     }
 
     getData = () => {
-        let {active} = this.state;
-        let data = this.state.data.map((item, id) => {
-            return {
-                id,
-                x: new Date(item.ts * 1),
-                y: item[active] * 1,
-                name: item.date
-
-            }
+        let { active, data, duration } = this.state;
+        let formattedData = [];
+        formattedData = data.map((item, id) => {
+            let currYear = new Date().getFullYear();
+            let itemYear = new Date(item.ts * 1).getFullYear()
+            let obj = null;
+            if ((currYear - itemYear) <= duration) {
+                obj = {
+                    id,
+                    x: new Date(item.ts * 1),
+                    y: item[active] * 1,
+                    name: item.date,
+                    value: item.date,
+                    mmyy: item.mmyy
+                }
+            };
+            return obj;
         });
-        return data;
+
+        formattedData = formattedData.filter(item => item);
+
+        if (duration === DATA_DURATION.ALL_YEAR) {
+            formattedData = _.uniqBy(formattedData, (item) => item.mmyy);
+        }
+
+        return formattedData;
     }
 
     getOptionConfig = () => {
@@ -79,10 +98,10 @@ class HistoricChart extends Component {
                     text: 'Date'
                 },
                 labels: {
-                    formatter: function() {
-                      return formatDate(this.value * 1);
+                    formatter: function () {
+                        return formatDate(this.value * 1);
                     }
-                  }
+                }
             }],
             yAxis: [{
                 title: {
@@ -102,6 +121,12 @@ class HistoricChart extends Component {
         });
     }
 
+    onChartdurationChange = (duration) => {
+        this.setState({
+            duration
+        });
+    }
+
     render() {
         if (this.state.data.length === 0) {
             return <div>Loading</div>;
@@ -111,10 +136,18 @@ class HistoricChart extends Component {
 
         return (<div className="historic-data">
             <div className="chart-option">
-                <ChartOption active={this.state.active } clickHandler={ this.onChartOptionChange } />
+                <ChartOption active={this.state.active} clickHandler={this.onChartOptionChange} />
+                <DateOption duration={this.state.duration} clickHandler={this.onChartdurationChange} />
             </div>
             <div>
-                <Highchart options={options} />
+                {
+
+                    options.series[0].data.length > 0
+                        ?
+                        <Highchart options={options} />
+                        :
+                        <div className="no-data">No data found.</div>
+                }
             </div>
         </div>)
     }

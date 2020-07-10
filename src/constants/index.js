@@ -9,3 +9,10 @@ export const DATA_DISPLAY_TYPES = {
     CLOSE: 'close'
 };
 
+export const DATA_DURATION = {
+    ONE_YEAR: 1,
+    TWO_YEAR: 2,
+    FIVE_YEAR: 5,
+    ALL_YEAR: 100
+};
+
