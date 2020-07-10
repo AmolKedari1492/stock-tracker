@@ -5,7 +5,7 @@ import ChartOption from "./ChartOption";
 
 import {
     processStockDayData,
-    formatDate
+    getHHMM,
 } from "../utils";
 
 import {
@@ -81,7 +81,7 @@ class LiveChart extends Component {
                 id,
                 x: new Date(item.ts * 1),
                 y: item[active] * 1,
-                name: item.date
+                name: new Date(item.ts * 1)
 
             }
         });
@@ -111,7 +111,7 @@ class LiveChart extends Component {
                 },
                 labels: {
                     formatter: function () {
-                        return formatDate(this.value * 1);
+                        return getHHMM(this.value * 1);
                     }
                 }
             }],
@@ -125,6 +125,12 @@ class LiveChart extends Component {
                 radius: 3
             }
         };
+    }
+
+    onChartdurationChange = (duration) => {
+        this.setState({
+            duration
+        });
     }
 
     render() {

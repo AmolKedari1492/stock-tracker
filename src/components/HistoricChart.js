@@ -24,7 +24,7 @@ class HistoricChart extends Component {
         this.state = {
             data: [],
             active: DATA_DISPLAY_TYPES.OPEN,
-            duration: DATA_DURATION.ONE_YEAR
+            duration: DATA_DURATION.FIVE_YEAR
         };
     }
 

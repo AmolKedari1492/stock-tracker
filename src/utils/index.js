@@ -27,3 +27,10 @@ export const getMMYY = (ts) => {
     return `${month}${year}`;
 };
 
+export const getHHMM = (ts) => {
+    let date = new Date(ts * 1);
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    return `${hh}:${mm}`;
+}
+
