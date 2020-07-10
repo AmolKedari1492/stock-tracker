@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">
-        <a className="app__link" href="/" > Stock Tracker </a>
+        <a className="app__link" href="/" ><h1>Stock Tracker</h1></a>
       </header>
       <section className="app__section">
         <Switch>

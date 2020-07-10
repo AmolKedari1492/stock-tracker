@@ -12,7 +12,7 @@ export const event = (cb) => socket.on('event', cb);
 
 export const onError = (cb) => socket.on('error', (err) => cb(err));
 
-export const onData = (cb) => socket.on('data', (data) => cb(data));
+export const onData = (cb) => socket.on('data', (data, f) => cb(data, f));
 
 export const onPing = (cb) => socket.on('ping', (data) => cb(data));
 

@@ -1,49 +1,55 @@
 import React, { Component } from "react";
-import io from 'socket.io-client';
 
-import APIService from "../services/API";
-import {
-    connect, onPing, onError,  emitPing, emitSub, onData, onSub, emitUnSub
-} from "../services/SocketService";
+import "./Home.scss";
 
-import {
-    BASE_API,
-    WS_URL
-} from "../constants/";
+import HistoricChart from "./HistoricChart";
+import LiveChart from "./LiveChart";
+
+const VIEW = {
+    HISTORIC: 1,
+    LIVE: 2
+};
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        connect();
-        onData(handler);
-        onError(handler)
-        onSub(handler);
-        // onPing(handler);
-        setInterval(() => {
-            emitSub();
-            onData(handler);
-            // emitPing();
-        }, 1000)
+        this.state = {
+            active: VIEW.HISTORIC
+        };
     }
 
-    componentDidMount() {
-        // emitUnSub();
-        this.fetchHistoricalData();
-    }
-
-    handler = () => {}
-
-    fetchHistoricalData = () => {
-        APIService.getHistoricalData((resp) => {
-            console.log(resp)
-        }, (err) => {
-            console.log(err)
-        })
+    toggleView = (active) => {
+        this.setState({
+            active
+        });
     }
 
     render() {
-        return(<div className="home">
-            Home page
+        let { active } = this.state;
+
+        return (<div className="home">
+            <ul className="nav">
+                <li className={`nav-item ${active === VIEW.HISTORIC ? 'active' : ''}`} onClick={() => this.toggleView(VIEW.HISTORIC)}>
+                    <a className="nav-link" href="/">Historic Chart</a>
+                </li>
+                <li className={`nav-item ${active === VIEW.LIVE ? 'active' : ''}`} onClick={() => this.toggleView(VIEW.LIVE)}>
+                    <a className="nav-link" href="/">Live Chart</a>
+                </li>
+            </ul>
+            {
+                active === VIEW.HISTORIC
+                    ?
+                    <HistoricChart />
+                    :
+                    null
+            }
+            {
+                active === VIEW.LIVE
+                    ?
+                    <LiveChart />
+                    :
+                    null
+            }
         </div>)
     }
 }

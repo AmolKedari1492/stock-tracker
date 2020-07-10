@@ -1,0 +1,39 @@
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    font-size: 21px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #333;
+    border-bottom: 1px solid #333;
+    margin: 10px;
+
+    .active {
+        background-color: #FFF;
+        color: #007bff;
+        border: 1px solid #333;
+        border-radius: 4px 4px 0 0;
+        position: relative;
+        top: 1px;
+        border-bottom: 1px solid #fff;
+    }
+
+    &-link {
+        display: block;
+        padding: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        background-color: transparent;
+        pointer-events: none;
+    }
+}
+
+.chart-option {
+    text-align: center;
+}
