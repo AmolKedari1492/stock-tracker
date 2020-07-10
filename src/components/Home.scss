@@ -1,3 +1,5 @@
+@import "../scss/variable.scss";
+
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -32,18 +34,31 @@
         background-color: transparent;
         pointer-events: none;
     }
+
+    @media all and (max-width: $medium-size) {
+        font-size: 16px;
+        line-height: 1.2;
+    }
 }
 
 .chart-option {
     display: flex;
     margin: 0 50px;
+
+    .date-group {
+        margin-left: auto;
+    }
+
+    @media all and (max-width: $medium-size) {
+        flex-direction: column;
+
+        .date-group {
+            margin: 20px;
+        }
+    }
 }
 
 .no-data {
     margin: 50px;
     text-align: center;
-}
-
-.date-group {
-    margin-left: auto;
 }

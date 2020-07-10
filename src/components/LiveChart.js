@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../scss/_common.scss";
 
 import Highchart from "./Highchart";
 import ChartOption from "./ChartOption";
@@ -135,7 +136,7 @@ class LiveChart extends Component {
 
     render() {
         if (this.state.data.length === 0) {
-            return <div>Loading</div>;
+            return <div  className="loading-text">Loading...</div>;
         }
 
         const options = this.getOptionConfig();
