@@ -13,8 +13,7 @@ class AxiosService {
             headers: {
                 "Accept": "application/json",
                 "Access-Control-Allow-Origin": "*"
-            },
-            baseURL: BASE_API
+            }
         }).then((res) => {
             if(res.status === 200) {
                 successCb(res.data);
