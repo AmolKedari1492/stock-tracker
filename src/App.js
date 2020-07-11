@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import * as serviceWorker  from "./serviceWorker"
 
 import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
@@ -26,3 +27,6 @@ function App() {
 }
 
 export default App;
+
+// serviceWorker.unregister()
+serviceWorker.register()
