@@ -13,7 +13,8 @@ class AxiosService {
             headers: {
                 "Accept": "application/json",
                 "Access-Control-Allow-Origin": "*"
-            }
+            },
+            baseURL: BASE_API
         });
 
         try {
