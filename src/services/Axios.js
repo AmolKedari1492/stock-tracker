@@ -18,6 +18,7 @@ class AxiosService {
                     "Accept": "application/json",
                     "Access-Control-Allow-Origin": "*"
                 },
+                baseURL: BASE_API
             });
             if (resp.status === 200) {
                 responseBackup = resp.data;

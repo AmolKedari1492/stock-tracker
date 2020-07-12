@@ -1,3 +1,31 @@
+## gitrepo
+https://github.com/AmolKedari1492/stock-tracker
+
+## prodsite
+http://akedari-stock-tracker.herokuapp.com/
+
+## Techstack
+React, HTML5, CSS3, SCSS, Webpack, SocketIO
+## External library
+React-dom, Prop-types, lodash, axios, Hichart, react-router
+
+This project is created using CRA latest verstion.
+Below is the official readme
+
+This project includes following points
+It showing historical data and live data on two different tabs, each of graph can be seen on differnt data types on OHLC
+Historical data can be visible on time periodicity. Here, Data should be picked in random way, it is better to have periodicity logic on backend. Live data fetched from socket-io.client.
+
+Project folder structure is splitted into component, service, scss, constant, utils as per need. Axios, socket and API are divided.
+Component are based on their functionality. SCSS styling and responsive UI are added.
+
+All specified API are working on local env by using proxy but on prod it is not working, tried with different methods like POSTMAN tools, no-cors, SSL, express server; didn't work. May be issue with reverse-proxy or nginx routing or no-cors is not enabled but if it get solved prod will work definitely. 
+
+I have enabled service worker for offline but axios doesn't work well with SW so API data is cached locally. So, Historic data availble on offline mode but live data is not. SW issue tried on prod and SSL but not on HTTP2. 
+
+### Note: To run in local env we need to remove axios baseUrl as proxy is added or above API get fixed.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
