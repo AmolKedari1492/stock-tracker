@@ -1,7 +1,8 @@
 import axios from "axios";
 
 import {
-    BASE_API
+    BASE_API,
+    NETWORK_ISSUE_MESSAGES
 } from "../constants/";
 
 let responseBackup = null;
@@ -26,7 +27,7 @@ class AxiosService {
             }
         } catch (e) {
             console.error(e);
-            if(e.message === "Network Error") {
+            if(NETWORK_ISSUE_MESSAGES.indexOf(e.message) > -1) {
                 successCb(responseBackup);
             } else {
                 errorCb({ error: e});

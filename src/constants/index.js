@@ -16,3 +16,4 @@ export const DATA_DURATION = {
     ALL_YEAR: 100
 };
 
+export const NETWORK_ISSUE_MESSAGES = [ "Network Error", "Request failed with status code 500"];
