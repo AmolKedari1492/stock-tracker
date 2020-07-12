@@ -1,6 +1,8 @@
 import React from "react";
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import PropTypes from 'prop-types';
+
 
 const Highchart = (props) => <div>
   <HighchartsReact
@@ -10,3 +12,8 @@ const Highchart = (props) => <div>
 </div>;
 
 export default Highchart;
+
+Highchart.propTypes = {
+  options: PropTypes.object
+};
+

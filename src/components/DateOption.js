@@ -1,11 +1,13 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 import "./ChartOption.scss";
 
 import {
     DATA_DURATION
 } from "../constants/";
 
-const ChartOption = (props) => {
+const DateOption = (props) => {
     return (<div className="btn-group date-group">
         <button type="button" onClick={ () => props.clickHandler(DATA_DURATION.ONE_YEAR) } 
             className={`btn btn-secondary first ${props.duration === DATA_DURATION.ONE_YEAR ? 'active' : ''} `}>1Y</button>
@@ -18,4 +20,9 @@ const ChartOption = (props) => {
     </div>)
 };
 
-export default ChartOption;
+export default DateOption;
+
+DateOption.propTypes = {
+    active: PropTypes.string,
+    clickHandler: PropTypes.func
+};
